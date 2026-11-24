@@ -8,6 +8,37 @@
 
 ---
 
+## 0. Contexto de Negocio, Entorno e Inteligencia de Mercados (`EVA360_NEDI_RC1`)
+
+### 0.1. Identificación de la Oportunidad de Mercado
+- **Brecha operativa (sustento cualitativo):** La coordinación de organizaciones estudiantiles universitarias (como el *Club de Negocios Digitales · UDLA*) suele fragmentarse entre chats de WhatsApp, hojas de cálculo manuales y calendarios aislados. Esto provoca pérdida de trazabilidad sobre líderes vs. participantes, ausencia de control formal de horas de participación y desconocimiento de cruces con fechas críticas académicas.
+- **Sustento cuantitativo del proyecto y entorno:** En la arquitectura de origen del club (`club-negocios-bot`, periodo `2027-10`) operan **3 niveles de roles** (Administración/Directiva, Admin TI y Miembros), **3 categorías operativas** (`Marketing`, `Eventos`, `Otro`), una estructura inicial de **7+ integrantes/directiva activos** y **16 tablas relacionales** en web adaptadas a **3 entidades núcleo móviles** (`Member`, `ClubActivity`, `ClubEvent`) junto al calendario oficial UDLA `2027-10`. En el contexto nacional ecuatoriano, el **80,1%** de la población ya utiliza internet y el **59,3%** cuenta con smartphone (INEC, 2025), habilitando una adopción directa de herramientas móviles en campus.
+- **Proyecciones a corto y mediano plazo (metas del proyecto):**
+  - *Corto plazo (Periodo 2027-10 · Progreso 2–3):* Unificar el **100%** de la gestión de tareas, calendario UDLA/Club y seguimiento de horas/XP del CND en la app `.NET MAUI`, reemplazando 3 canales dispersos por una sola aplicación offline-first en SQLite.
+  - *Mediano plazo (2027–2028):* Sincronizar la aplicación `.NET MAUI` mediante API REST con el servidor central del club (`club-negocios-bot`) y replicar la plantilla hacia otros clubes y asociaciones estudiantiles de FACEA / UDLA.
+
+### 0.2. Evaluación del Entorno (Ecuador · Ecosistema Universitario UDLA)
+
+| Variable del Entorno | Hallazgo e Interpretación (2022–2025 / Periodo 2027-10) | Relación Directa con `.NET MAUI` (`ClubNegociosUDLA`) |
+|---|---|---|
+| **Tecnológica** | Según el INEC (2025), el acceso a internet en hogares pasó de **60,4% (2022)** a **71,3% (2025)** (**76,6%** en área urbana como Quito), la tenencia de smartphones subió de **52,2%** a **59,3%** y el analfabetismo digital cayó del **8,2%** al **2,1%**. | Valida lanzar una app móvil Android sin barreras de adopción, compilando desde un único código C#/XAML para **Android y Windows**, mientras **SQLite local** garantiza continuidad incluso en aulas o auditorios sin Wi-Fi estable. |
+| **Académica / Institucional** | El semestre UDLA `2027-10` exige cumplir ventanas estrictas (Progreso 1, 2 y 3, retiros y asentamiento de notas) compatibilizando clases con eventos del club (*Digital Talks*, *Día FACEA*). | Justifica el módulo **Agenda UDLA**, que cruza fechas académicas oficiales con eventos propios del Club en color cyan y logo institucional. |
+| **Económica** | Los clubes universitarios operan con presupuesto limitado y no disponen de fondos recurrentes para licencias SaaS por miembro. | Exige una arquitectura con costo **\$0 en licencias** (`.NET 10 SDK`, `SQLite`, `GitHub`), evitando suscripciones mensuales por usuario. |
+| **Organizacional / Social** | La rotación semestral de directivas y miembros en clubes genera pérdida de historial cuando los datos quedan en teléfonos personales. | Impone autenticación institucional (`@udla.edu.ec`), roles diferenciados (Admin TI / Directiva / Miembro) y registro estructurado de horas y XP. |
+
+### 0.3. Integración de Herramientas de Inteligencia de Mercados (Benchmark Comparativo)
+Para validar el diseño frente a alternativas reales del mercado, se compararon los planes gratuitos y límites vigentes de herramientas líderes de productividad frente a nuestra solución a medida:
+
+| Criterio Evaluado | WhatsApp + Excel | Trello (Free / Standard) | Notion (Free / Plus) | **ClubNegociosUDLA (.NET MAUI)** |
+|---|---|---|---|---|
+| **Límite en plan gratuito** | Sin límite formal, pero sin base relacional ni control de estados | Máx. **10 tableros** y **10 colaboradores** por workspace | Límite de **1,000 bloques** totales cuando hay 2+ miembros | **Ilimitado** en registros y usuarios (SQLite embebido) |
+| **Costo al escalar equipo** | \$0 (alto costo en tiempo manual y errores) | ~**\$5–\$6** / usuario / mes (Standard) para quitar límites | ~**\$10** / usuario / mes (Plus) para equipos colaborativos | **\$0 en licencias** (desarrollo académico propio) |
+| **Vista de Agenda / Calendario** | No integrada | Bloqueada en plan Free (requiere plan pago) | Incluida, pero requiere configuración manual | **Integrada** con calendario oficial UDLA `2027-10` + Club |
+| **Control de horas, XP y roles UDLA** | Manual en hojas sueltas | No nativo (solo tarjetas genéricas) | Parcial mediante plantillas manuales | **Nativo** (roles `@udla.edu.ec`, horas, XP, pines y CRUD) |
+| **Operación sin conexión** | Limitada / desincronizada | Parcial | Limitada | **100% funcional offline** con SQLite (`club_negocios_maui.db3`) |
+
+---
+
 ## 1. Estructura de Gestión y Avance del Proyecto en .NET MAUI
 
 ### 1.1. Porcentaje de Avance del Proyecto MAUI
@@ -134,8 +165,9 @@ Todos los resultados generados fueron **revisados, compilados, ejecutados y vali
 
 ## 7. Bibliografía (Formato APA 7)
 
-- Microsoft. (2025). *What is .NET MAUI? - .NET MAUI documentation*. Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui
+- Hipp, D. R. (2025). *SQLite Documentation*. SQLite Consortium. https://www.sqlite.org/docs.html
+- Instituto Nacional de Estadística y Censos [INEC]. (2025). *Estadísticas de Tecnologías de la Información y Comunicación (TIC) – ENEMDU 2022–2025*. Gobierno del Ecuador. https://www.ecuadorencifras.gob.ec/
+- Krueger, F. A. (2024). *sqlite-net: Simple, powerful, cross-platform SQLite client and ORM for .NET* [Software]. GitHub. https://github.com/praeclarum/sqlite-net
 - Microsoft. (2025). *.NET MAUI local databases (SQLite-net)*. Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/maui/data-cloud/database-sqlite
 - Microsoft. (2025). *.NET MAUI Shell overview*. Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/maui/fundamentals/shell/
-- Krueger, F. A. (2024). *sqlite-net: Simple, powerful, cross-platform SQLite client and ORM for .NET* [Software]. GitHub. https://github.com/praeclarum/sqlite-net
-- Hipp, D. R. (2025). *SQLite Documentation*. SQLite Consortium. https://www.sqlite.org/docs.html
+- Microsoft. (2025). *What is .NET MAUI? - .NET MAUI documentation*. Microsoft Learn. https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui
