@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClubNegociosUDLA.Pages.HomePage"
+             Title="Inicio"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="18,16" Spacing="16" MaximumWidthRequest="880" HorizontalOptions="Center">
+            <!-- Hero Banner UDLA -->
+            <Border StrokeThickness="0" BackgroundColor="#82091E" Padding="20,18">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="18" />
+                </Border.StrokeShape>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="14">
+                    <VerticalStackLayout Grid.Column="0" Spacing="6">
+                        <Label x:Name="GreetingLabel"
+                               Text="¡Hola, Santiago!"
+                               TextColor="White"
+                               FontSize="22"
+                               FontAttributes="Bold" />
+                        <Label x:Name="RoleLabel"
+                               Text="🛠️ Desarrollador · Admin TI · Periodo 2027-10"
+                               TextColor="#F4E4E7"
+                               FontSize="13" />
+                        <Label x:Name="DateLabel"
+                               Text="Martes 24 Nov 2026"
+                               TextColor="#FDF2F4"
+                               FontSize="12" />
+                    </VerticalStackLayout>
+                    <Border Grid.Column="1" BackgroundColor="White" StrokeThickness="0" Padding="10,8" VerticalOptions="Center">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+                        <Image Source="logo_club.png" HeightRequest="42" WidthRequest="42" Aspect="AspectFit" />
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- Métricas KPI -->
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="10">
+                <Border Grid.Column="0" BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="12">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="PendingCountLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+                        <Label Text="Pendientes" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="1" BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="12">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="InProgressCountLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="{StaticResource ClubCyan}" />
+                        <Label Text="En Proceso" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="2" BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="12">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="DoneCountLabel" Text="0" FontSize="22" FontAttributes="Bold" TextColor="#16A34A" />
+                        <Label Text="Completadas" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+                <Border Grid.Column="3" BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="12">
+                    <Border.StrokeShape><RoundRectangle CornerRadius="14" /></Border.StrokeShape>
+                    <VerticalStackLayout Spacing="2">
+                        <Label x:Name="XpCountLabel" Text="0 XP" FontSize="20" FontAttributes="Bold" TextColor="#D97706" />
+                        <Label x:Name="HoursSubLabel" Text="0 h aprobadas" FontSize="11" TextColor="{StaticResource TextMuted}" />
+                    </VerticalStackLayout>
+                </Border>
+            </Grid>
+
+            <!-- Barra rápida -->
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Grid.Column="0" Text="📌 Fijados en Inicio" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource TextMain}" VerticalOptions="Center" />
+                <Button Grid.Column="1" Text="+ Nueva Actividad" Clicked="OnNewActivityClicked" BackgroundColor="{StaticResource Primary}" TextColor="White" FontAttributes="Bold" CornerRadius="10" Padding="14,8" />
+            </Grid>
+
+            <VerticalStackLayout x:Name="PinnedListLayout" Spacing="10" />
+
+            <Label x:Name="NoPinnedLabel"
+                   IsVisible="False"
+                   Text="No tienes actividades fijadas aún. Toca 📌 en Actividades para fijarlas aquí."
+                   FontSize="13"
+                   TextColor="{StaticResource TextMuted}" />
+
+            <Label Text="📅 Próximas Actividades y Eventos" FontSize="17" FontAttributes="Bold" TextColor="{StaticResource TextMain}" Margin="0,4,0,0" />
+
+            <VerticalStackLayout x:Name="UpcomingListLayout" Spacing="10" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

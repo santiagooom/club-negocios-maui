@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClubNegociosUDLA.Pages.ActivitiesPage"
+             Title="Actividades"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16,14" RowSpacing="12" MaximumWidthRequest="900" HorizontalOptions="Center">
+        <!-- Buscador + Botón Crear -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <Border Grid.Column="0" BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="6,2">
+                <Border.StrokeShape><RoundRectangle CornerRadius="12" /></Border.StrokeShape>
+                <SearchBar x:Name="ActivitySearchBar"
+                           Placeholder="Buscar actividad, líder o categoría..."
+                           TextChanged="OnSearchTextChanged"
+                           TextColor="{StaticResource TextMain}"
+                           BackgroundColor="Transparent" />
+            </Border>
+            <Button Grid.Column="1"
+                    Text="+ Nueva"
+                    Clicked="OnCreateClicked"
+                    BackgroundColor="{StaticResource Primary}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    Padding="16,10" />
+        </Grid>
+
+        <!-- Filtros de estado -->
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+            <HorizontalStackLayout Spacing="8">
+                <Button x:Name="FilterAllBtn" Text="Todas" Clicked="OnFilterClicked" CommandParameter="TODAS" CornerRadius="16" FontSize="12" Padding="14,6" />
+                <Button x:Name="FilterPendingBtn" Text="Pendientes" Clicked="OnFilterClicked" CommandParameter="PENDIENTE" CornerRadius="16" FontSize="12" Padding="14,6" />
+                <Button x:Name="FilterProgressBtn" Text="En Proceso" Clicked="OnFilterClicked" CommandParameter="EN_PROGRESO" CornerRadius="16" FontSize="12" Padding="14,6" />
+                <Button x:Name="FilterDoneBtn" Text="Completadas" Clicked="OnFilterClicked" CommandParameter="COMPLETADO" CornerRadius="16" FontSize="12" Padding="14,6" />
+            </HorizontalStackLayout>
+        </ScrollView>
+
+        <!-- Listado SQLite con CRUD -->
+        <CollectionView Grid.Row="2" x:Name="ActivitiesListView" SelectionMode="None">
+            <CollectionView.EmptyView>
+                <VerticalStackLayout Padding="28" Spacing="8" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Label Text="No hay actividades en este filtro." FontSize="15" TextColor="{StaticResource TextMuted}" HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+            </CollectionView.EmptyView>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="16" Margin="0,0,0,10">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+                        <VerticalStackLayout Spacing="8">
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                                <Label Grid.Column="0" Text="{Binding Title}" FontSize="16" FontAttributes="Bold" TextColor="{StaticResource TextMain}" />
+                                <Border Grid.Column="1" BackgroundColor="{StaticResource CardSubtle}" StrokeThickness="0" Padding="10,4">
+                                    <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                                    <Label Text="{Binding StatusBadge}" FontSize="11" FontAttributes="Bold" TextColor="{Binding StatusColor}" />
+                                </Border>
+                            </Grid>
+
+                            <Label Text="{Binding Description}" FontSize="13" TextColor="{StaticResource TextMuted}" MaxLines="2" LineBreakMode="TailTruncation" />
+                            <Label Text="{Binding MetaLine}" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource Primary}" />
+
+                            <ProgressBar Progress="{Binding ProgressFraction}" ProgressColor="{Binding StatusColor}" BackgroundColor="{StaticResource Gray100}" />
+
+                            <HorizontalStackLayout Spacing="8" Margin="0,2,0,0">
+                                <Button Text="{Binding PinLabel}"
+                                        Clicked="OnPinClicked"
+                                        CommandParameter="{Binding Id}"
+                                        BackgroundColor="{StaticResource ClubCyanSoft}"
+                                        TextColor="{StaticResource ClubCyan}"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        CornerRadius="8"
+                                        Padding="12,6"
+                                        HeightRequest="34" />
+                                <Button Text="✏️ Editar"
+                                        Clicked="OnEditClicked"
+                                        CommandParameter="{Binding Id}"
+                                        BackgroundColor="{StaticResource Gray100}"
+                                        TextColor="{StaticResource TextMain}"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        CornerRadius="8"
+                                        Padding="12,6"
+                                        HeightRequest="34" />
+                                <Button Text="🗑️ Eliminar"
+                                        Clicked="OnDeleteClicked"
+                                        CommandParameter="{Binding Id}"
+                                        BackgroundColor="#FEE2E2"
+                                        TextColor="#B91C1C"
+                                        FontSize="12"
+                                        FontAttributes="Bold"
+                                        CornerRadius="8"
+                                        Padding="12,6"
+                                        HeightRequest="34" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

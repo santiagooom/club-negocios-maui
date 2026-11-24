@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClubNegociosUDLA.Pages.AgendaPage"
+             Title="Agenda UDLA"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <Grid RowDefinitions="Auto,Auto,*" Padding="16,14" RowSpacing="12" MaximumWidthRequest="900" HorizontalOptions="Center">
+        <!-- Filtros y botón nuevo evento -->
+        <Grid Grid.Row="0" ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <HorizontalStackLayout Grid.Column="0" Spacing="8">
+                <Button x:Name="AllEventsBtn" Text="Todos" Clicked="OnFilterClicked" CommandParameter="TODOS" CornerRadius="16" FontSize="12" Padding="14,6" />
+                <Button x:Name="ClubEventsBtn" Text="Club CND" Clicked="OnFilterClicked" CommandParameter="CLUB" CornerRadius="16" FontSize="12" Padding="14,6" />
+                <Button x:Name="UdlaEventsBtn" Text="UDLA 2027-10" Clicked="OnFilterClicked" CommandParameter="UDLA" CornerRadius="16" FontSize="12" Padding="14,6" />
+            </HorizontalStackLayout>
+            <Button Grid.Column="1"
+                    Text="+ Evento"
+                    Clicked="OnToggleFormClicked"
+                    BackgroundColor="{StaticResource ClubCyan}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    Padding="14,8" />
+        </Grid>
+
+        <!-- Formulario rápido para agregar evento en SQLite -->
+        <Border Grid.Row="1" x:Name="NewEventPanel" IsVisible="False" BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="16">
+            <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+            <VerticalStackLayout Spacing="10">
+                <Label Text="Registrar Evento en Agenda" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource TextMain}" />
+                <Entry x:Name="EventTitleEntry" Placeholder="Título del evento o hito" TextColor="{StaticResource TextMain}" />
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                    <Picker x:Name="EventTypePicker" Grid.Column="0" TextColor="{StaticResource TextMain}" />
+                    <DatePicker x:Name="EventDatePicker" Grid.Column="1" Format="yyyy-MM-dd" TextColor="{StaticResource TextMain}" />
+                </Grid>
+                <Entry x:Name="EventLocationEntry" Placeholder="Lugar (ej. Auditorio UDLA Park)" TextColor="{StaticResource TextMain}" />
+                <Button Text="Guardar Evento en SQLite" Clicked="OnSaveEventClicked" BackgroundColor="{StaticResource ClubCyan}" TextColor="White" FontAttributes="Bold" CornerRadius="10" />
+            </VerticalStackLayout>
+        </Border>
+
+        <!-- Listado Agenda Híbrida -->
+        <CollectionView Grid.Row="2" x:Name="EventsListView" SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Border BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="14" Margin="0,0,0,10">
+                        <Border.StrokeShape><RoundRectangle CornerRadius="16" /></Border.StrokeShape>
+                        <Grid ColumnDefinitions="6,*,Auto" ColumnSpacing="12">
+                            <BoxView Grid.Column="0" BackgroundColor="{Binding AccentColor}" WidthRequest="6" CornerRadius="3" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
+                                    <Image Source="logo_club.png" IsVisible="{Binding IsClubEvent}" HeightRequest="18" WidthRequest="18" Aspect="AspectFit" />
+                                    <Border BackgroundColor="{Binding BadgeBg}" StrokeThickness="0" Padding="8,3">
+                                        <Border.StrokeShape><RoundRectangle CornerRadius="8" /></Border.StrokeShape>
+                                        <Label Text="{Binding CategoryLabel}" FontSize="11" FontAttributes="Bold" TextColor="{Binding AccentColor}" />
+                                    </Border>
+                                </HorizontalStackLayout>
+                                <Label Text="{Binding Title}" FontSize="15" FontAttributes="Bold" TextColor="{StaticResource TextMain}" />
+                                <Label Text="{Binding DateRangeText}" FontSize="12" FontAttributes="Bold" TextColor="{Binding AccentColor}" />
+                                <Label Text="{Binding Location}" FontSize="12" TextColor="{StaticResource TextMuted}" />
+                            </VerticalStackLayout>
+                            <Button Grid.Column="2"
+                                    Text="🗑️"
+                                    Clicked="OnDeleteEventClicked"
+                                    CommandParameter="{Binding Id}"
+                                    BackgroundColor="#FEE2E2"
+                                    TextColor="#B91C1C"
+                                    VerticalOptions="Center"
+                                    WidthRequest="42"
+                                    HeightRequest="38"
+                                    CornerRadius="10" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+</ContentPage>

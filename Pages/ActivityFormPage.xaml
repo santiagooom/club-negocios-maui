@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClubNegociosUDLA.Pages.ActivityFormPage"
+             Title="Actividad"
+             BackgroundColor="{StaticResource PageBg}">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="18,16" Spacing="14" MaximumWidthRequest="620" HorizontalOptions="Center">
+            <Label x:Name="HeaderTitleLabel"
+                   Text="Nueva Actividad del Club"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="{StaticResource TextMain}" />
+
+            <Border BackgroundColor="White" Stroke="{StaticResource BorderSubtle}" Padding="18">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="16" />
+                </Border.StrokeShape>
+                <VerticalStackLayout Spacing="12">
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Título de la actividad *" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                        <Entry x:Name="TitleEntry" Placeholder="Ej. Campaña Digital Talks 2027-10" TextColor="{StaticResource TextMain}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Descripción" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                        <Editor x:Name="DescriptionEditor" Placeholder="Detalles, entregables y criterios..." AutoSize="TextChanges" MinimumHeightRequest="80" TextColor="{StaticResource TextMain}" />
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Categoría" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                            <Picker x:Name="CategoryPicker" TextColor="{StaticResource TextMain}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Prioridad" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                            <Picker x:Name="PriorityPicker" TextColor="{StaticResource TextMain}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label Text="Estado" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                            <Picker x:Name="StatusPicker" TextColor="{StaticResource TextMain}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Fecha límite" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                            <DatePicker x:Name="DueDatePicker" Format="yyyy-MM-dd" TextColor="{StaticResource TextMain}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Responsable encargado (Líder)" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                        <Picker x:Name="ResponsiblePicker" TextColor="{StaticResource TextMain}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Participantes asignados" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                        <Entry x:Name="ParticipantsEntry" Placeholder="Ej. Xavier Rojas, Anderson Calderón" TextColor="{StaticResource TextMain}" />
+                    </VerticalStackLayout>
+
+                    <Grid ColumnDefinitions="2*,*" ColumnSpacing="12">
+                        <VerticalStackLayout Grid.Column="0" Spacing="4">
+                            <Label x:Name="ProgressValueLabel" Text="Progreso: 0%" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                            <Slider x:Name="ProgressSlider" Minimum="0" Maximum="100" ValueChanged="OnProgressChanged" MinimumTrackColor="{StaticResource Primary}" ThumbColor="{StaticResource Primary}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Grid.Column="1" Spacing="4">
+                            <Label Text="Horas estimadas" FontSize="12" FontAttributes="Bold" TextColor="{StaticResource TextMuted}" />
+                            <Entry x:Name="HoursEntry" Keyboard="Numeric" Text="2" TextColor="{StaticResource TextMain}" />
+                        </VerticalStackLayout>
+                    </Grid>
+
+                    <HorizontalStackLayout Spacing="10" VerticalOptions="Center">
+                        <Switch x:Name="PinSwitch" OnColor="{StaticResource Primary}" />
+                        <Label Text="📌 Fijar en la pantalla de Inicio" VerticalOptions="Center" TextColor="{StaticResource TextMain}" FontSize="14" />
+                    </HorizontalStackLayout>
+
+                    <Label x:Name="FormErrorLabel" IsVisible="False" TextColor="#DC2626" FontSize="13" />
+
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,6,0,0">
+                        <Button Grid.Column="0"
+                                Text="Cancelar"
+                                Clicked="OnCancelClicked"
+                                BackgroundColor="{StaticResource Gray100}"
+                                TextColor="{StaticResource TextMain}"
+                                CornerRadius="10" />
+                        <Button Grid.Column="1"
+                                Text="Guardar en SQLite"
+                                Clicked="OnSaveClicked"
+                                BackgroundColor="{StaticResource Primary}"
+                                TextColor="White"
+                                FontAttributes="Bold"
+                                CornerRadius="10" />
+                    </Grid>
+
+                    <Button x:Name="DeleteButton"
+                            IsVisible="False"
+                            Text="Eliminar Actividad"
+                            Clicked="OnDeleteClicked"
+                            BackgroundColor="#FEE2E2"
+                            TextColor="#B91C1C"
+                            FontAttributes="Bold"
+                            CornerRadius="10" />
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

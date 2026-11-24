@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ClubNegociosUDLA.Pages.SplashPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#82091E">
+
+    <Grid RowDefinitions="*,Auto,*" Padding="32">
+        <VerticalStackLayout Grid.Row="1" Spacing="18" HorizontalOptions="Center">
+            <Border BackgroundColor="White"
+                    StrokeThickness="0"
+                    Padding="22,16"
+                    HorizontalOptions="Center">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="22" />
+                </Border.StrokeShape>
+                <HorizontalStackLayout Spacing="16" HorizontalOptions="Center" VerticalOptions="Center">
+                    <Image Source="logo_udla.png" HeightRequest="46" Aspect="AspectFit" />
+                    <BoxView WidthRequest="1" HeightRequest="34" BackgroundColor="#E5E5EA" />
+                    <Image Source="logo_club.png" HeightRequest="48" Aspect="AspectFit" />
+                </HorizontalStackLayout>
+            </Border>
+
+            <Label Text="Club de Negocios Digitales"
+                   TextColor="White"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   HorizontalTextAlignment="Center" />
+
+            <Label Text="Plataforma Multiplataforma .NET MAUI · Periodo 2027-10"
+                   TextColor="#F4E4E7"
+                   FontSize="14"
+                   HorizontalTextAlignment="Center" />
+
+            <ActivityIndicator IsRunning="True"
+                               Color="White"
+                               Margin="0,12,0,0" />
+
+            <Label x:Name="StatusLabel"
+                   Text="Inicializando base de datos local SQLite..."
+                   TextColor="#FDF2F4"
+                   FontSize="12"
+                   HorizontalTextAlignment="Center" />
+        </VerticalStackLayout>
+
+        <Label Grid.Row="2"
+               Text="UDLA · Quito, Ecuador"
+               TextColor="#F4E4E7"
+               FontSize="12"
+               VerticalOptions="End"
+               HorizontalTextAlignment="Center" />
+    </Grid>
+</ContentPage>
