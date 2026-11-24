@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="ClubNegociosUDLA.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Club de Negocios Digitales · UDLA"
+    Shell.TabBarBackgroundColor="White"
+    Shell.TabBarForegroundColor="#82091E"
+    Shell.TabBarTitleColor="#82091E"
+    Shell.TabBarUnselectedColor="#6E6E73"
+    Shell.BackgroundColor="#82091E"
+    Shell.ForegroundColor="White"
+    Shell.TitleColor="White">
+
+    <TabBar x:Name="MainTabBar" />
+
+</Shell>
